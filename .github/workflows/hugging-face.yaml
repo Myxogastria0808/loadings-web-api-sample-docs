@@ -35,9 +35,7 @@ jobs:
           HF_SPACE_NAME: ${{ secrets.HF_SPACE_NAME }}
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          cp -f README.md README.md
-          git config --global user.name "${GITHUB_ACTOR}"
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          cp -f README.md _site/README.md
           git switch site
           git add .
           git commit -m "add README.md"

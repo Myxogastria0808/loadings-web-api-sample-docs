@@ -5,10 +5,33 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync-to-hub:
+  build-website:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        run: quarto preview index.qmd --no-browser --no-watch-inputs
+  push-output:
+    runs-on: ubuntu-latest
+    needs: build-website
+    steps:
+      - name: Push to site branch
+        uses: s0/git-publish-subdir-action@master
+        env:
+          REPO: self
+          BRANCH: site
+          FOLDER: _site
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  sync-to-hub:
+    runs-on: ubuntu-latest
+    needs: push-output
+    steps:
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true

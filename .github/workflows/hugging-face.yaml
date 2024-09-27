@@ -5,17 +5,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  copy-readme:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          lfs: true
-      - name: Copy README
-        run: |
-          cp -f README.md _site/README.md
   push-output:
     runs-on: ubuntu-latest
     needs: copy-readme
@@ -25,6 +14,8 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+      - name: Copy README
+        run: cp -f README.md _site/README.md
       - name: Push to site branch
         uses: s0/git-publish-subdir-action@master
         env:

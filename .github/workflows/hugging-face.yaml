@@ -16,6 +16,8 @@ jobs:
       - name: Copy README
         run: |
           cp -f README.md _site/README.md
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git switch site
           git add .
           git commit -m "add README.md"

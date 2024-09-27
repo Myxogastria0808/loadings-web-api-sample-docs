@@ -1,0 +1,16 @@
+---
+title: "Loading Web API Sample Docs"
+about:
+  template: jolla
+  image: ./assets/image.png
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/Myxogastria0808
+---
+
+# Hugging Face Spaces
+
+<a class="my-link-button" href="https://myxogastria0808-loadings-web-api-sample.hf.space/__docs__/#/">Try Web API</a>
+
+I created Web API using plumber and hositing hugging face spaces.
